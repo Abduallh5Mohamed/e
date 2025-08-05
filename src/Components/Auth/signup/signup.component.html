@@ -1,0 +1,198 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Join our trusted service network</p>
+    </div>
+
+    <!-- Error Alert -->
+    <div class="alert alert-error" *ngIf="error" role="alert">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ error }}</span>
+      <button type="button" class="alert-close" (click)="clearError()" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Sign Up Form -->
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+      
+      <!-- Display Name Field -->
+      <div class="form-group">
+        <label for="displayName" class="form-label">
+          <i class="fas fa-user"></i>
+          Display Name
+        </label>
+        <input
+          type="text"
+          id="displayName"
+          formControlName="displayName"
+          class="form-input"
+          [class.error]="hasError('displayName')"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        />
+        <div class="error-message" *ngIf="hasError('displayName')">
+          {{ getErrorMessage('displayName') }}
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email" class="form-label">
+          <i class="fas fa-envelope"></i>
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          [class.error]="hasError('email')"
+          placeholder="Enter your email address"
+          autocomplete="email"
+        />
+        <div class="error-message" *ngIf="hasError('email')">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock"></i>
+          Password
+        </label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            class="form-input password-input"
+            [class.error]="hasError('password')"
+            placeholder="Create a strong password"
+            autocomplete="new-password"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility('password')"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
+            <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+        <div class="password-requirements">
+          <small>Password must contain uppercase, lowercase, and number</small>
+        </div>
+        <div class="error-message" *ngIf="hasError('password')">
+          {{ getErrorMessage('password') }}
+        </div>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="form-group">
+        <label for="confirmPassword" class="form-label">
+          <i class="fas fa-lock"></i>
+          Confirm Password
+        </label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-input password-input"
+            [class.error]="hasError('confirmPassword')"
+            placeholder="Confirm your password"
+            autocomplete="new-password"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility('confirmPassword')"
+            [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'"
+          >
+            <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+        <div class="error-message" *ngIf="hasError('confirmPassword')">
+          {{ getErrorMessage('confirmPassword') }}
+        </div>
+      </div>
+
+      <!-- Terms and Conditions -->
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            formControlName="acceptTerms"
+            class="checkbox-input"
+            [class.error]="hasError('acceptTerms')"
+          />
+          <span class="checkbox-custom"></span>
+          <span class="checkbox-text">
+            I agree to the 
+            <a href="/terms" target="_blank" class="link">Terms of Service</a> 
+            and 
+            <a href="/privacy" target="_blank" class="link">Privacy Policy</a>
+          </span>
+        </label>
+        <div class="error-message" *ngIf="hasError('acceptTerms')">
+          {{ getErrorMessage('acceptTerms') }}
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary btn-full"
+        [disabled]="loading || signupForm.invalid"
+        [class.loading]="loading"
+      >
+        <span *ngIf="!loading">
+          <i class="fas fa-user-plus"></i>
+          Create Account
+        </span>
+        <span *ngIf="loading" class="loading-content">
+          <i class="fas fa-spinner fa-spin"></i>
+          Creating Account...
+        </span>
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>or continue with</span>
+    </div>
+
+    <!-- Social Login Buttons -->
+    <div class="social-buttons">
+      <button
+        type="button"
+        class="btn btn-social btn-google"
+        (click)="signUpWithGoogle()"
+        [disabled]="loading"
+      >
+        <i class="fab fa-google"></i>
+        <span>Google</span>
+      </button>
+      
+      <button
+        type="button"
+        class="btn btn-social btn-facebook"
+        (click)="signUpWithFacebook()"
+        [disabled]="loading"
+      >
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </button>
+    </div>
+
+    <!-- Login Link -->
+    <div class="auth-footer">
+      <p>Already have an account? 
+        <a routerLink="/login" class="link">Sign in here</a>
+      </p>
+    </div>
+  </div>
+</div>

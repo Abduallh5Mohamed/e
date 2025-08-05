@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from '../Components/Landing/home/home.component';
-import { LoginComponent } from '../Components/Landing/login/login.component';
-import { RegisterComponent } from '../Components/Landing/register/register.component';
+import { LoginComponent } from '../Components/Auth/login/login.component';
+import { SignupComponent } from '../Components/Auth/signup/signup.component';
+import { VerifyEmailComponent } from '../Components/Auth/verify-email/verify-email.component';
 import { AboutComponent } from '../Components/Landing/about/about.component';
 import { FeedbackComponent } from '../Components/Landing/feedback/feedback.component';
 import { ServicesComponent } from '../Components/Landing/services/services.component';
@@ -20,32 +21,52 @@ import { FinancialComponent } from '../Components/Admin/financial/financial.comp
 import { TechnicianEarningsComponent } from '../Components/TechniciansDashboard/earnings/earnings.component';
 import { TechniciansDashboardComponent } from '../Components/TechniciansDashboard/dashboard/dashboard.component';
 import { JobsComponent } from '../Components/TechniciansDashboard/jobs/jobs.component';
+import { AuthGuard, AdminGuard, TechnicianGuard, GuestGuard } from '../Services/auth-guard.service';
 
 export const routes: Routes = [
   // Main website routes
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signUp', component: RegisterComponent },
+  
+  // Authentication routes (only accessible when not logged in)
+  { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [GuestGuard] },
+  { path: 'signUp', redirectTo: '/signup', pathMatch: 'full' }, // Redirect old route
+  { path: 'verify-email', component: VerifyEmailComponent },
+  
+  // Public routes
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: FeedbackComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'technicians', component: LandingTechniciansComponent },
-  { path: 'technician/dashboard', component: TechniciansDashboardComponent },
- {path:'jobs',component:JobsComponent},
-
-  {path:'technicianearnings',component:TechnicianEarningsComponent},
   
+  // Technician routes (protected)
+  { 
+    path: 'technician/dashboard', 
+    component: TechniciansDashboardComponent, 
+    canActivate: [TechnicianGuard] 
+  },
+  { 
+    path: 'jobs', 
+    component: JobsComponent, 
+    canActivate: [TechnicianGuard] 
+  },
+  { 
+    path: 'technicianearnings', 
+    component: TechnicianEarningsComponent, 
+    canActivate: [TechnicianGuard] 
+  },
 
-  // Customer Dashboard (Dashboard Demo - like before)
-  { path: 'dashboard', component: CustomerDashboardComponent },
-  { path: 'vehicles', component: VehiclesComponent },
-  { path: 'service-history', component: ServiceHistoryComponent },
+  // Customer Dashboard (protected)
+  { path: 'dashboard', component: CustomerDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'vehicles', component: VehiclesComponent, canActivate: [AuthGuard] },
+  { path: 'service-history', component: ServiceHistoryComponent, canActivate: [AuthGuard] },
 
-  // Professional Admin Dashboard with Child Routes
+  // Professional Admin Dashboard with Child Routes (protected)
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardHomeComponent },

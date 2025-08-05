@@ -1,0 +1,145 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">Sign in to your account</p>
+    </div>
+
+    <!-- Error Alert -->
+    <div class="alert alert-error" *ngIf="error" role="alert">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ error }}</span>
+      <button type="button" class="alert-close" (click)="clearError()" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+      
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email" class="form-label">
+          <i class="fas fa-envelope"></i>
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          [class.error]="hasError('email')"
+          placeholder="Enter your email address"
+          autocomplete="email"
+        />
+        <div class="error-message" *ngIf="hasError('email')">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock"></i>
+          Password
+        </label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            class="form-input password-input"
+            [class.error]="hasError('password')"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
+            <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+        <div class="error-message" *ngIf="hasError('password')">
+          {{ getErrorMessage('password') }}
+        </div>
+      </div>
+
+      <!-- Remember Me and Forgot Password -->
+      <div class="form-options">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            formControlName="rememberMe"
+            class="checkbox-input"
+          />
+          <span class="checkbox-custom"></span>
+          <span class="checkbox-text">Remember me</span>
+        </label>
+        
+        <button
+          type="button"
+          class="forgot-password-btn"
+          (click)="onForgotPassword()"
+          [disabled]="loading"
+        >
+          Forgot Password?
+        </button>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary btn-full"
+        [disabled]="loading || loginForm.invalid"
+        [class.loading]="loading"
+      >
+        <span *ngIf="!loading">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign In
+        </span>
+        <span *ngIf="loading" class="loading-content">
+          <i class="fas fa-spinner fa-spin"></i>
+          Signing In...
+        </span>
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>or continue with</span>
+    </div>
+
+    <!-- Social Login Buttons -->
+    <div class="social-buttons">
+      <button
+        type="button"
+        class="btn btn-social btn-google"
+        (click)="signInWithGoogle()"
+        [disabled]="loading"
+      >
+        <i class="fab fa-google"></i>
+        <span>Google</span>
+      </button>
+      
+      <button
+        type="button"
+        class="btn btn-social btn-facebook"
+        (click)="signInWithFacebook()"
+        [disabled]="loading"
+      >
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </button>
+    </div>
+
+    <!-- Sign Up Link -->
+    <div class="auth-footer">
+      <p>Don't have an account? 
+        <a routerLink="/signup" class="link">Create one here</a>
+      </p>
+    </div>
+  </div>
+</div>
