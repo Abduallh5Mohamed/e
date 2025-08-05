@@ -1,0 +1,119 @@
+.technicians-section {
+  background-color: var(--background-color);
+  padding: 4rem 1rem;
+  transition: var(--time-transition);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width:992px) {
+  .section-title {
+    font-size: 1rem;
+    max-width: 80%;
+  }
+
+  .section-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .section-title::after {
+    max-width: 60%;
+    margin: auto;
+  }
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #e63946, transparent);
+  border-radius: 3px;
+}
+
+.section-subtitle {
+  color: #ccc;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width:992px) {}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.tech-card {
+  width: 260px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #e63946;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tech-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(230, 57, 70, 0.5);
+  cursor: pointer;
+}
+
+.tech-img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-title {
+  color: #E63946;
+  font-weight: bold;
+}
+
+.stars {
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-btn {
+  background-color: #E63946;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #c92c3b;
+}

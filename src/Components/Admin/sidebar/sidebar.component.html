@@ -1,0 +1,71 @@
+<!-- Mobile Overlay -->
+<div class="sidebar-overlay" [class.active]="mobileOpen" (click)="closeMobileSidebar()"></div>
+
+<aside class="professional-sidebar" [class.collapsed]="collapsed" [class.mobile-open]="mobileOpen">
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title" *ngIf="!collapsed">
+        <span>Main Navigation</span>
+      </div>
+      <ul class="nav-list">
+        <li *ngFor="let item of menuItems" class="nav-item">
+          <a [routerLink]="item.route" routerLinkActive="active" class="nav-link" [title]="collapsed ? item.label : ''"
+            (click)="onMenuItemClick()">
+            <div class="nav-icon">
+              <i [class]="item.icon"></i>
+            </div>
+            <span class="nav-label" *ngIf="!collapsed">{{item.label}}</span>
+            <span class="nav-badge" *ngIf="item.badge && item.badge > 0 && !collapsed">
+              {{item.badge > 99 ? '99+' : item.badge}}
+            </span>
+            <div class="nav-indicator"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="nav-section" *ngIf="!collapsed">
+      <div class="nav-section-title">
+        <span>Quick Actions</span>
+      </div>
+      <div class="quick-actions-grid">
+        <button *ngFor="let action of quickActions" class="quick-action-card" [style.--action-color]="action.color"
+          (click)="handleQuickAction(action.action)" [title]="action.label">
+          <i [class]="action.icon"></i>
+          <span>{{action.label}}</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer -->
+  <div class="sidebar-footer">
+    <div class="footer-stats" *ngIf="!collapsed">
+      <div class="stat-item">
+        <i class="fas fa-clock"></i>
+        <div class="stat-info">
+          <span class="stat-value">Online</span>
+          <small class="stat-label">Status</small>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-chart-line"></i>
+        <div class="stat-info">
+          <span class="stat-value">98.5%</span>
+          <small class="stat-label">Uptime</small>
+        </div>
+      </div>
+    </div>
+
+    <button class="logout-btn" (click)="logout()" [title]="collapsed ? 'Logout' : ''">
+      <i class="fas fa-sign-out-alt"></i>
+      <span *ngIf="!collapsed">Sign Out</span>
+    </button>
+  </div>
+
+  <!-- Sidebar Resize Handle -->
+  <div class="resize-handle" *ngIf="!collapsed"></div>
+</aside>

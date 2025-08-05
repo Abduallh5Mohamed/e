@@ -1,0 +1,66 @@
+.feedback-page {
+  background-color:var(--background-color);
+  color: #fff;
+}
+
+.highlight-text {
+  color: #E83030;
+}
+
+.feedback-form {
+  background-color: transparent;
+}
+
+.feedback-form h2 {
+  color: #E83030;
+}
+
+.custom-input {
+  background-color: #444;
+  color: white;
+  border: none;
+}
+
+.custom-input::placeholder {
+  color: #ccc;
+}
+
+.custom-input:focus {
+  border: 1px solid #E83030;
+  box-shadow: none;
+  background-color: #444;
+  color: #fff;
+}
+
+.submit-btn {
+  background-color: #E83030;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #c72b2b;
+  color: white;
+}
+
+hr{
+     background: linear-gradient(to left, transparent, #E83030);
+     border: none;
+     height: 4px;
+}
+
+.contact-info-box h3 {
+  color: #E83030;
+}
+
+.contact-list a {
+  color: #ddd;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.contact-list a:hover {
+  color: #E83030;
+  text-decoration: none;
+}

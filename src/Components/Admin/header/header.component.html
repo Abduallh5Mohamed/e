@@ -1,0 +1,139 @@
+<header class="professional-header">
+  <div class="header-container">
+    <!-- Left Section -->
+    <div class="header-left">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()" title="Toggle Sidebar">
+        <!-- Desktop icon -->
+        <div class="toggle-icon desktop-icon" [class.rotated]="sidebarCollapsed">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <!-- Mobile hamburger icon -->
+        <div class="toggle-icon mobile-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+      </button>
+    </div>
+
+    <!-- Center Section -->
+    <div class="header-center">
+      <div class="search-container">
+        <div class="search-wrapper">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" placeholder="Search anything..." class="search-input">
+          <button class="search-filter-btn" title="Advanced Search">
+            <i class="fas fa-sliders-h"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="header-right">
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <button class="quick-action-btn" title="Add New">
+          <i class="fas fa-plus"></i>
+        </button>
+        <button class="quick-action-btn" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" (click)="toggleTheme()"
+          [title]="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+          <span class="theme-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+        </button>
+      </div>
+
+      <!-- Notifications -->
+      <div class="notifications-container">
+        <button class="notification-btn" (click)="toggleNotifications()" title="Notifications">
+          <i class="fa-solid fa-bell" [class.has-notifications]="hasNotifications"></i>
+          <span class="notification-badge" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+          <div class="notification-pulse" *ngIf="hasNotifications"></div>
+        </button>
+
+        <!-- Notification Dropdown -->
+        <div class="notification-dropdown" *ngIf="showNotifications" (clickOutside)="closeNotifications()">
+          <div class="dropdown-header">
+            <h3><i class="fas fa-bell"></i> Notifications</h3>
+            <button class="clear-all-btn" (click)="clearAllNotifications()">
+              <i class="fas fa-trash"></i> Clear All
+            </button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item" *ngFor="let notification of notifications; let i = index"
+              [class]="'priority-' + notification.priority">
+              <div class="notification-icon">
+                <i class="fas" [class.fa-wrench]="notification.type === 'service'"
+                  [class.fa-check-circle]="notification.type === 'completion'"
+                  [class.fa-dollar-sign]="notification.type === 'payment'"
+                  [class.fa-user-plus]="notification.type === 'registration'"
+                  [class.fa-server]="notification.type === 'system'"
+                  [class.fa-star]="notification.type === 'feedback'"></i>
+              </div>
+              <div class="notification-content">
+                <p>{{notification.message}}</p>
+                <small>{{notification.time}}</small>
+              </div>
+              <button class="dismiss-btn" (click)="dismissNotification(i)" title="Dismiss">
+                <i class="fa-solid fa-times"></i>
+              </button>
+            </div>
+            <div class="no-notifications" *ngIf="notifications.length === 0">
+              <i class="fas fa-bell-slash"></i>
+              <p>No new notifications</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Profile -->
+      <div class="user-profile-container">
+        <div class="profile-selector" (click)="toggleAdminDropdown()">
+          <div class="profile-avatar">
+            <img [src]="currentAdmin.avatar" [alt]="currentAdmin.name" class="avatar-img">
+            <div class="status-indicator" [class]="'status-' + currentAdmin.status"></div>
+          </div>
+          <div class="profile-info">
+            <span class="username">{{currentAdmin.name}}</span>
+            <small class="user-role">{{currentAdmin.role}}</small>
+          </div>
+          <i class="fas fa-chevron-down dropdown-arrow" [class.rotated]="showAdminDropdown"></i>
+        </div>
+
+        <!-- Admin Dropdown -->
+        <div class="admin-dropdown" *ngIf="showAdminDropdown" (clickOutside)="closeAdminDropdown()">
+          <div class="dropdown-header">
+            <h4><i class="fas fa-users-cog"></i> Switch Account</h4>
+          </div>
+          <div class="admin-list">
+            <div class="admin-item" *ngFor="let admin of admins; let i = index" (click)="switchAdmin(i)"
+              [class.active]="i === currentAdminIndex">
+              <div class="admin-avatar">
+                <img [src]="admin.avatar" [alt]="admin.name" class="admin-img">
+                <div class="admin-status" [class]="'status-' + admin.status"></div>
+              </div>
+              <div class="admin-details">
+                <span class="admin-name">{{admin.name}}</span>
+                <small class="admin-email">{{admin.email}}</small>
+                <span class="admin-role-tag">{{admin.role}}</span>
+              </div>
+              <i class="fas fa-check active-check" *ngIf="i === currentAdminIndex"></i>
+            </div>
+          </div>
+
+          <div class="dropdown-footer">
+            <button class="profile-btn">
+              <i class="fas fa-user-edit"></i>
+              <span>Edit Profile</span>
+            </button>
+            <button class="logout-btn" (click)="logout()">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

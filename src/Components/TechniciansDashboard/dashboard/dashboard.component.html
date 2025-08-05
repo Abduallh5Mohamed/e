@@ -1,0 +1,176 @@
+<div class="dashboard-container">
+  <!-- Header Section -->
+  <div class="header-banner">
+    <!-- Left Side: Profile -->
+    <div class="profile-section">
+      <img src="./assets/technicians-img/tech2.jpg" alt="Profile Image" class="profile-image" />
+      <div class="user-info">
+        <h2 class="user-name">{{ profile.name }}</h2>
+        <p class="user-details">
+          ⭐ {{ profile.rating }} (127 reviews) • {{ profile.totalJobs }} jobs completed
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Side: Stats + Availability -->
+    <div class="header-stats">
+      <div class="stat-item">
+        <span class="stat-number">${{ profile.earningsToday }}</span>
+        <span class="stat-label">Today</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">${{ profile.earningsWeek }}</span>
+        <span class="stat-label">This Week</span>
+      </div>
+      <!-- Availability Text in Header -->
+      <span class="availability-status">{{ availability }}</span>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="nav-tab" [class.active]="activeTab === 'Dashboard'" (click)="setActiveTab('Dashboard')">
+      <i class="fas fa-tachometer-alt"></i>
+      Dashboard
+    </button>
+  <button class="nav-tab" [class.active]="activeTab === 'Jobs'" (click)="setActiveTab('Jobs')">
+  <i class="fas fa-wrench"></i>
+  Jobs
+</button>
+
+    <button class="nav-tab" [class.active]="activeTab === 'Earnings'" (click)="setActiveTab('Earnings')">
+      <i class="fas fa-dollar-sign"></i>
+      Earnings
+    </button>
+    <button class="nav-tab" [class.active]="activeTab === 'Profile'" (click)="setActiveTab('Profile')">
+      <i class="fas fa-user-cog"></i>
+      Profile
+    </button>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-content" *ngIf="activeTab === 'Dashboard'">
+
+    <!-- Availability Section -->
+    <section class="availability-section">
+      <div class="availability-text-block">
+        <h3>Availability Status</h3>
+        <p>Toggle your availability to receive new jobs</p>
+      </div>
+      <select [(ngModel)]="availability" class="availability-select">
+        <option>Available</option>
+        <option>Busy</option>
+        <option>Offline</option>
+      </select>
+    </section>
+
+    <!-- Earnings Summary -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="card-icon money-icon">
+          <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="card-content">
+          <h3>Today's Earnings</h3>
+          <span class="stat-value">${{ profile.earningsToday }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-icon money-icon">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <div class="card-content">
+          <h3>This Week</h3>
+          <span class="stat-value">${{ profile.earningsWeek }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-icon money-icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="card-content">
+          <h3>This Month</h3>
+          <span class="stat-value">${{ profile.earningsMonth }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-icon services-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <div class="card-content">
+          <h3>Total Jobs</h3>
+          <span class="stat-value">{{ profile.totalJobs }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Today's Schedule -->
+    <div class="upcoming-services">
+      <h2>Today's Schedule</h2>
+      <div class="service-cards" *ngIf="jobsToday.length > 0">
+        <div class="service-card" *ngFor="let job of jobsToday">
+          <div class="service-details">
+            <h4>{{ job.title }}</h4>
+            <p>Customer: {{ job.customer }} | Distance: {{ job.distance }}</p>
+            <div class="service-meta">
+              <span class="time">{{ job.time }}</span>
+              <span class="price">${{ job.price }}</span>
+            </div></div>
+          <div class="service-status">
+            <span class="status" [class.accepted]="job.status === 'Accepted'" [class.pending]="job.status === 'Pending'">
+              {{ job.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="no-services" *ngIf="jobsToday.length === 0">
+        <i class="fas fa-calendar-times"></i>
+        <p>No jobs scheduled today</p>
+      </div>
+    </div>
+
+    <!-- Technician Tools -->
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="action-cards">
+        <div class="action-card add-service">
+          <div class="action-icon">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="action-content">
+            <h3>Add Service</h3>
+            <p>Create a new service to offer</p>
+          </div>
+        </div>
+
+        <div class="action-card view-reports">
+          <div class="action-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <div class="action-content">
+            <h3>View Reports</h3>
+            <p>Analyze your performance</p>
+          </div>
+        </div>
+
+        <div class="action-card messages">
+          <div class="action-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="action-content">
+            <h3>Messages</h3>
+            <p>Check and reply to messages</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Tabs -->
+  <div class="tab-content" *ngIf="activeTab === 'Jobs'"></div>
+  <div class="tab-content" *ngIf="activeTab === 'Earnings'"></div>
+  <div class="tab-content" *ngIf="activeTab === 'Profile'"></div>
+</div>

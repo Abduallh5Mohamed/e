@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--light);
+  color: var(--light-font-color);
+}
+
+.about-us .container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  padding: 50px;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.about-content {
+  min-width: 300px;
+  max-width: 500px;
+  transition: var(--time-transition);
+}
+
+.about-content h1 {
+  margin-bottom: 2rem;
+  word-spacing: 1px;
+  font-size: 2rem;
+  width: 100%;
+  max-width: 500px;
+  overflow-wrap: break-word;
+  color: var(--light);
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--light-font-color);
+}
+
+.about-image img {
+  width: 300px;
+  max-width: 100%;
+  filter: drop-shadow(3px 3px 5px var(--primary-color));
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.85rem;
+  margin-top: 2rem;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: darkorange;
+}
+
+@media (max-width: 992px) {
+  .about-us .container {
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .about-content h1 {
+    font-size: 1.8rem;
+    max-width: 100%;
+  }
+
+  .about-content {
+    width: 100%;
+    text-align: left;
+  }
+
+  .about-image {
+    width: 100%;
+  }
+
+  .head-of-section {
+    max-width: 100%;
+  }
+
+  .about-content p {
+    font-size: 0.7rem;
+    max-width: 90%;
+  }
+}

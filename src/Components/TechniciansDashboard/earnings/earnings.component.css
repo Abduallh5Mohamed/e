@@ -1,0 +1,251 @@
+.earnings-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--text-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.earnings-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.earnings-card.today .card-icon {
+    background: #ff6b35;
+    color: var(--light);
+}
+
+.earnings-card.week .card-icon {
+    background: #4ade80;
+    color: var(--light);
+}
+
+.earnings-card.month .card-icon {
+    background: #3b82f6;
+    color: var(--light);
+}
+
+.earnings-card.total .card-icon {
+    background: #a855f7;
+    color: var(--light);
+}
+
+.card-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--light-font-color);
+}
+
+.amount {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--light);
+}
+
+
+.job-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--text-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.job-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.currency {
+    font-size: 14px;
+    color: var(--light-font-color);
+    font-weight: 500;
+    margin: 0;
+}
+
+.service-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--light);
+    margin: 0;
+}
+
+.client-info {
+    font-size: 14px;
+    color: var(--light-font-color);
+    margin: 0;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.Paid {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status-badge.pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status-badge.Failed {
+    background: #fee2e2;
+    color: var(--primary-color);
+}
+
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--light);
+}
+
+.overview-title {
+    color: var(--light);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+.card {
+    --bs-card-bg: var(--card-bg-color);
+    --bs-card-border-color: var(--text-color);
+}
+
+
+@media (max-width: 576px) {
+    .job-card-mobile {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+    }
+    
+    .amount-mobile {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        align-self: flex-start !important;
+    }
+    
+    .status-mobile {
+        align-self: flex-end !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+
+    .overview-title {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .card-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .amount {
+        font-size: 16px;
+    }
+
+    .service-title {
+        font-size: 16px;
+    }
+
+    .job-amount {
+        font-size: 18px;
+    }
+
+    .currency {
+        font-size: 12px;
+    }
+
+    .client-info {
+        font-size: 13px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .card-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .amount {
+        font-size: 17px;
+    }
+
+    .overview-title {
+        font-size: 26px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .service-title {
+        font-size: 17px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .overview-title {
+        font-size: 22px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .card-content h3 {
+        font-size: 12px;
+    }
+
+    .amount {
+        font-size: 15px;
+    }
+
+    .service-title {
+        font-size: 15px;
+    }
+
+    .client-info {
+        font-size: 12px;
+    }
+
+    .status-badge {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}

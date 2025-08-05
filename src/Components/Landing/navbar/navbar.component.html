@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <a class="navbar-brand ms-5" routerLink="/">
+      <span class="brand-text">Aut<span class="brand-highlight">⊙</span>Works</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
+      <ul class="navbar-nav align-items-center me-3">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/technicians">Technicians</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Dashboard Demo</a>
+        </li>
+      </ul>
+
+      <div class="d-flex flex-column flex-lg-row align-items-center gap-2 gap-lg-3">
+        <form class="search-form d-flex align-items-center position-relative me-lg-3" role="search"
+          aria-label="Site search">
+          <input type="search" class="form-control search-input" placeholder="Search..." aria-label="Search" />
+          <button type="submit" class="btn search-btn" aria-label="Submit search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+
+        <div class="d-flex auth-buttons flex-wrap gap-2">
+          <a class="btn btn-outline-primary auth-signup" routerLink="/signUp">Sign Up</a>
+          <a class="btn btn-primary auth-login" routerLink="/login">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

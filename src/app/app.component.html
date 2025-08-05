@@ -1,0 +1,26 @@
+<!-- Show navbar only when NOT on admin pages -->
+<app-navbar *ngIf="!isAdminPage"></app-navbar>
+
+<!-- Admin Dashboard Button -->
+<div style="position: fixed; top: 120px; right: 20px; z-index: 1000;">
+  <button (click)="goToAdminDashboard()"
+    [style.background]="isAdminPage ? 'linear-gradient(135deg, #28a745, #1e7e34)' : 'linear-gradient(135deg, #007bff, #0056b3)'"
+    style="color: white; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); font-weight: 600; transition: all 0.3s ease;"
+    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0, 123, 255, 0.5)'"
+    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 123, 255, 0.3)'">
+    {{ isAdminPage ? 'Go to Website' : 'Go to Admin Dashboard' }}
+  </button>
+</div>
+
+<router-outlet></router-outlet>
+
+<!-- Show landing page sections only when on home page -->
+<ng-container *ngIf="isHomePage">
+  <app-technicians></app-technicians>
+  <app-services></app-services>
+  <app-about></app-about>
+  <app-feedback></app-feedback>
+</ng-container>
+
+<!-- Show footer only when NOT on dashboard pages -->
+<app-footer *ngIf="!isDashboardPage"></app-footer>

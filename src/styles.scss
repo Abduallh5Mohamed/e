@@ -1,0 +1,317 @@
+//TODO @use "../node_modules/bootstrap/scss/bootstrap" as *;
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+// Global Theme Variables
+:root {
+  // Light theme (default) - Enhanced for accessibility
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #111827;
+  /* Darker for better contrast (AAA compliant) */
+  --text-secondary: #4b5563;
+  /* Better contrast than previous */
+  --text-muted: #6b7280;
+  /* Accessible muted text */
+  --border-color: #d1d5db;
+  /* More visible borders */
+  --hover-bg: #f3f4f6;
+  /* Subtle hover background */
+  --shadow: rgba(0, 0, 0, 0.1);
+  --header-bg: rgba(255, 255, 255, 0.98);
+  --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  --sidebar-header-bg: rgba(255, 59, 59, 0.05);
+  --active-bg: #ff3b3be8;
+  /* Primary color for active states */
+  --active-text: #ffffff;
+  --accent-color: #ff3b3be8;
+  --primary-color: #ff3b3be8;
+  --primary-hover: #dc2626;
+  --success-color: #059669;
+  /* Darker green for better contrast */
+  --warning-color: #d97706;
+  /* Darker amber for better contrast */
+  --danger-color: #dc2626;
+  /* Darker red for better contrast */
+}
+
+// Dark theme - YouTube Dark Mode Style
+body.dark-theme {
+  --bg-primary: #0f0f0f;
+  /* YouTube's main dark background */
+  --bg-secondary: #181818;
+  /* YouTube's secondary dark background */
+  --text-primary: #ffffff;
+  /* Pure white text like YouTube */
+  --text-secondary: #aaaaaa;
+  /* YouTube's secondary text color */
+  --text-muted: #717171;
+  /* YouTube's muted text */
+  --border-color: #303030;
+  /* YouTube's border color */
+  --hover-bg: #272727;
+  /* YouTube's hover background */
+  --shadow: rgba(0, 0, 0, 0.5);
+  --header-bg: rgba(15, 15, 15, 0.98);
+  /* YouTube's header background */
+  --sidebar-bg: linear-gradient(180deg, #0f0f0f 0%, #181818 100%);
+  /* YouTube sidebar gradient */
+  --sidebar-header-bg: rgba(255, 59, 59, 0.1);
+  --active-bg: #ff3b3be8;
+  --active-text: #ffffff;
+  --accent-color: #ff3b3be8;
+  --primary-color: #ff3b3be8;
+  --primary-hover: #ff5555;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #f87171;
+}
+
+// Light theme explicit class
+body.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --border-color: #d1d5db;
+  --hover-bg: #f3f4f6;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --header-bg: rgba(255, 255, 255, 0.98);
+  --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  --sidebar-header-bg: rgba(255, 59, 59, 0.05);
+  --active-bg: #ff3b3be8;
+  --active-text: #ffffff;
+  --accent-color: #ff3b3be8;
+  --primary-color: #ff3b3be8;
+  --primary-hover: #dc2626;
+  --success-color: #059669;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+
+  --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --primary-color: #ff3b3be8;
+  --primary-hover: #d12626;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+}
+
+// Global styles to prevent double scrollbars
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Prevent horizontal scrollbar */
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// Accessibility improvements
+* {
+  box-sizing: border-box;
+}
+
+// Focus states for accessibility
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+// High contrast focus for navigation
+.nav-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+// Ensure proper contrast ratios
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --border-color: #666666;
+  }
+
+  body.dark-theme {
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: #999999;
+  }
+}
+
+// Hide body scrollbar when on admin pages
+body.admin-page {
+  overflow: hidden;
+}
+
+$primary: #ff3b3be8;
+$background-darkgray: #1C1C1E;
+$dark: #0a0a0a;
+$secondary: #5b272a;
+$light: #ffffff;
+$text-color: #333;
+$card-bg-color: #2c2c2c;
+$icon-bg-color: #ff3b3be8;
+$icon-border-color: #ff3b3b96;
+$background-color: #1a1a1a;
+$light-font-color: #c0c0c0;
+$hover-primary: #fa33338c;
+
+// Status Colors
+$success-color: #4caf50;
+$success-bg: rgba(76, 175, 80, 0.2);
+$warning-color: #ffc107;
+$warning-bg: rgba(255, 193, 7, 0.2);
+$danger-color: #f44336;
+$danger-bg: rgba(244, 67, 54, 0.2);
+
+// Icon Gradient Colors
+$services-gradient-start: #ffa726;
+$services-gradient-end: #ff8a65;
+$money-gradient-start: #66bb6a;
+$money-gradient-end: #4caf50;
+$loyalty-gradient-start: #42a5f5;
+$loyalty-gradient-end: #1e88e5;
+$member-gradient-start: #ab47bc;
+$member-gradient-end: #8e24aa;
+
+:root {
+  --primary-color: #{$primary};
+  --secondary-color: #{$secondary};
+  --text-color: #{$text-color};
+  --card-bg-color: #{$card-bg-color};
+  --icon-bg-color: #{$icon-bg-color};
+  --icon-border-color: #{$icon-border-color};
+  --background-color: #{$background-color};
+  --background-darkgray: #{$background-darkgray};
+  --light-font-color: #{$light-font-color};
+  --hover-primary: #{$hover-primary};
+
+  // Status Colors
+  --success-color: #{$success-color};
+  --success-bg: #{$success-bg};
+  --warning-color: #{$warning-color};
+  --warning-bg: #{$warning-bg};
+  --danger-color: #{$danger-color};
+  --danger-bg: #{$danger-bg};
+
+  // Icon Gradients
+  --services-gradient: linear-gradient(135deg,
+    #{$services-gradient-start},
+    #{$services-gradient-end});
+  --money-gradient: linear-gradient(135deg,
+    #{$money-gradient-start},
+    #{$money-gradient-end});
+  --loyalty-gradient: linear-gradient(135deg,
+    #{$loyalty-gradient-start},
+    #{$loyalty-gradient-end});
+  --member-gradient: linear-gradient(135deg,
+    #{$member-gradient-start},
+    #{$member-gradient-end});
+
+  --padding: 1rem;
+  --border-radius: 16px;
+  --time-transition: 0.3s ease-in-out;
+  --line-height: 1.7;
+  --font-size-small: 0.8rem;
+  --box-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  --dark: #{$dark};
+  --light: #{$light};
+}
+
+body {
+  background-color: var(--background-color) !important;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.light-theme body {
+  background-color: #f5f5f5 !important;
+}
+
+.head-of-section {
+  font-weight: 600;
+
+  padding: {
+    top: 40px;
+    bottom: 10px;
+  }
+
+  h2 {
+    color: var(--icon-bg-color);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 16px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    font-size: 40px;
+    color: var(--light);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-bg-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 8px;
+  border: 3px solid var(--card-bg-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Global Theme Variables for Admin Dashboard */
+body.light-theme,
+.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #333;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #94a3b8;
+  --hover-bg: #f1f5f9;
+}
+
+body.dark-theme,
+.dark-theme {
+  --bg-primary: #0f0f0f;
+  /* YouTube's main dark background */
+  --bg-secondary: #181818;
+  /* YouTube's secondary dark background */
+  --text-primary: #ffffff;
+  /* Pure white text like YouTube */
+  --text-secondary: #aaaaaa;
+  /* YouTube's secondary text color */
+  --border-color: #303030;
+  /* YouTube's border color */
+  --shadow: rgba(0, 0, 0, 0.5);
+  --scrollbar-track: #0f0f0f;
+  /* YouTube scrollbar track */
+  --scrollbar-thumb: #717171;
+  /* YouTube scrollbar thumb */
+  --scrollbar-thumb-hover: #aaaaaa;
+  /* YouTube scrollbar hover */
+  --hover-bg: #272727;
+  /* YouTube's hover background */
+}

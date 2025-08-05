@@ -1,0 +1,137 @@
+<main class="main-content">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Service History</h1>
+      <p class="page-subtitle">
+        Track your vehicle maintenance and service records
+      </p>
+    </div>
+    <div class="filters-section">
+      <div class="filter-group">
+        <select class="filter-select" id="serviceFilter">
+          <option value="all">All Services</option>
+          <option value="oil-change">Oil Change & Filter</option>
+          <option value="brake-service">Brake Service</option>
+          <option value="tire-service">Tire Service</option>
+          <option value="engine-repair">Engine Repair</option>
+          <option value="transmission">Transmission</option>
+        </select>
+        <select class="filter-select" id="vehicleFilter">
+          <option value="all">All Vehicles</option>
+          <option value="toyota-camry">Toyota Camry</option>
+          <option value="honda-crv">Honda CR-V</option>
+          <option value="ford-f150">Ford F-150</option>
+          <option value="bmw-x3">BMW X3</option>
+        </select>
+      </div>
+      <button class="add-service-btn" id="addServiceBtn" (click)="openAddServiceModal()">
+        <i class="fas fa-plus"></i>
+        Add Service
+      </button>
+    </div>
+    <div class="service-list">
+      <div *ngFor="let service of serviceHistory; trackBy: trackByServiceId" class="service-card"
+        [attr.data-type]="service.serviceType" [attr.data-vehicle]="service.vehicle">
+        <div class="service-header">
+          <div class="service-title-group">
+            <h3 class="service-title">{{ service.title }}</h3>
+            <span class="status-badge">{{ service.status }}</span>
+          </div>
+          <div class="price-rating-group">
+            <span class="service-price">${{ service.price }}</span>
+            <div class="rating">
+              <span class="star" *ngFor="let star of [0, 1, 2, 3, 4]; let i = index"
+                [class.empty]="i >= service.rating">★</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-details">
+          <div class="detail-item">
+            <i class="fas fa-calendar-alt detail-icon"></i>
+            <span>{{ service.date }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-user-cog detail-icon"></i>
+            <span>{{ service.technician }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-car detail-icon"></i>
+            <span>{{ service.vehicle }}</span>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <a href="#" class="btn btn-primary">Book Again</a>
+          <a href="#" class="btn btn-secondary">Download Invoice</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Service Modal -->
+  <div class="modal-overlay" *ngIf="showAddServiceModal" (click)="closeAddServiceModal()"
+    (keydown.escape)="closeAddServiceModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Add New Service</h3>
+        <button class="close-btn" (click)="closeAddServiceModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form class="service-form" (ngSubmit)="addNewService()" #serviceForm="ngForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="serviceTitle">Service Title</label>
+            <input type="text" id="serviceTitle" name="serviceTitle" [(ngModel)]="newService.title" required
+              placeholder="e.g., Oil Change & Filter">
+          </div>
+          <div class="form-group">
+            <label for="servicePrice">Price ($)</label>
+            <input type="number" id="servicePrice" name="servicePrice" [(ngModel)]="newService.price" required
+              placeholder="0.00">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="technician">Technician</label>
+            <input type="text" id="technician" name="technician" [(ngModel)]="newService.technician" required
+              placeholder="e.g., John Smith">
+          </div>
+          <div class="form-group">
+            <label for="vehicle">Vehicle</label>
+            <input type="text" id="vehicle" name="vehicle" [(ngModel)]="newService.vehicle" required
+              placeholder="e.g., Toyota Camry">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="serviceDate">Service Date</label>
+            <input type="date" id="serviceDate" name="serviceDate" [(ngModel)]="newService.date" required>
+          </div>
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <select id="rating" name="rating" [(ngModel)]="newService.rating" required>
+              <option value="">Select Rating</option>
+              <option value="5">5 Stars - Excellent</option>
+              <option value="4">4 Stars - Very Good</option>
+              <option value="3">3 Stars - Good</option>
+              <option value="2">2 Stars - Fair</option>
+              <option value="1">1 Star - Poor</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" (click)="closeAddServiceModal()">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="!serviceForm.valid">
+            <i class="fas fa-plus"></i>
+            Add Service
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

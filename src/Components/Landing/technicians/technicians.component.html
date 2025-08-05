@@ -1,0 +1,22 @@
+<section class="technicians-section ">
+  <h2 class="section-title">Our Expert Technicians</h2>
+  <p class="section-subtitle">Highly skilled professionals dedicated to quality service</p>
+  <div class="cards-container">
+    <div class="tech-card" *ngFor="let tech of technicians">
+      <div class="card bg-dark text-white border border-secondary h-100">
+        <img [src]="tech.image" class="card-img-top tech-img" [alt]="tech.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ tech.name }}</h5>
+          <p class="card-text mb-1">
+            {{ tech.experience }} years of experience in {{ tech.service }}
+          </p>
+          <p class="card-text mb-1">Rating: {{ tech.rating }} / 5</p>
+          <p class="card-text text-warning">
+            <ng-container *ngFor="let star of [].constructor(tech.rating)">★</ng-container>
+            <ng-container *ngFor="let star of [].constructor(5 - tech.rating)">☆</ng-container>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

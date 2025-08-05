@@ -1,0 +1,130 @@
+<div class="main-container">
+  <!-- Top Bar (Sticky) -->
+  <!-- <div class="top-bar">
+  <div class="user-section">
+    <img src="assets/technicians-img/tech9.jpg" alt="User" class="user-avatar">
+    <div class="user-info">
+      <h1>Robert King</h1>
+      <div class="user-stats">
+        <span class="rating">
+          ⭐ 4.9 (127 reviews)
+        </span>
+        <span class="jobs-count">• 340 jobs completed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-section">
+    <div class="earnings">
+      <span class="today">$245</span>
+      <span class="label">Today</span>
+    </div>
+    <div class="earnings">
+      <span class="week">$1680</span>
+      <span class="label">This Week</span>
+    </div>
+    <div class="availability available">Available</div>
+  </div>
+</div> -->
+
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <!-- Jobs Header -->
+   <div class="jobs-header">
+  <h2>All Jobs</h2>
+  <div class="jobs-filters">
+    <select class="dropdown-button">
+        <option value="all-status">All Status</option>
+      
+      <option>Pending</option>
+      <option>Accepting</option>
+    </select>
+
+    <select class="dropdown-button">
+        <option value="all-services">All Services</option>
+      <option>Oil Change</option>
+      <option>Brake Inspection</option>
+      <option>Tire Replacement</option>
+    </select>
+  </div>
+</div>
+
+
+    <!-- Jobs as Bars -->
+    <div class="jobs-bars">
+  <div class="job-bar" *ngFor="let job of jobs" >
+    <div class="job-info">
+      <h3>{{ job.title }} <span class="job-status">{{ job.status }}</span></h3>
+      
+      <!-- البيانات اللي تحت العنوان -->
+      <div class="job-details">
+        <div class="job-detail">
+          <i class="fas fa-user"></i> {{ job.customerName }}
+        </div>
+        <div class="job-detail">
+          <i class="fas fa-car"></i> {{ job.carModel }}
+        </div>
+        <div class="job-detail">
+          <i class="fas fa-clock"></i> {{ job.time }}
+        </div>
+        <div class="job-detail">
+          <i class="fas fa-map-marker-alt"></i> {{ job.distance }} away
+        </div>
+      </div>
+
+      <!-- الأزرار -->
+      <div class="job-actions">
+        <button class="btn view">👁 View Details</button>
+        <button class="btn call">📞 Call Customer</button>
+        <button class="btn directions">🗺 Get Directions</button>
+      </div>
+    </div>
+
+    <div class="job-meta">
+      <span class="price">${{ job.price }}</span>
+      
+    </div>
+  </div>
+</div>
+
+
+    <!-- Dual Divs -->
+    <div class="dual-divs">
+      <div class="div-item performance-div">
+        <h2>Performance this month</h2>
+        <div class="performance-details">
+          <p>Job Completed: <span>{{ performanceData.jobsCompleted }}</span></p>
+          <p>Average Rate: <span>{{ performanceData.averageRate }}</span></p>
+          <p>Response Time: <span>{{ performanceData.responseTime }}</span></p>
+          <p>Completion Rate: <span>{{ performanceData.completionRate }}</span></p>
+        </div>
+      </div>
+      <div class="div-item top-services-div">
+  <h2>Top Services</h2>
+  <div class="top-services-list">
+    <div class="service-item" *ngFor="let service of topServices">
+      <h3>{{ service.service }}</h3>
+      <p class="price">💰 {{ service.price }}</p>
+      <p class="count">Completed: {{ service.count }}</p>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Specialties Div -->
+    <div class="div-item specialties-div">
+      <h2>Specialties & Services</h2>
+      <div class="current-specialties">
+        <span class="specialty-tag" *ngFor="let specialty of specialties">
+          {{ specialty }} <span class="remove-specialty" (click)="removeSpecialty(specialty)">×</span>
+        </span>
+      </div>
+      <div class="add-specialty">
+        <input type="text" placeholder="Add new service" [(ngModel)]="newSpecialty">
+        <button class="add-button" (click)="addSpecialty()">+</button>
+      </div>
+    </div>
+  </div>
+</div>

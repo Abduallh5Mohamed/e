@@ -1,0 +1,117 @@
+<div class="container-fluid px-3 px-md-4 py-4">
+
+  <h3 class="overview-title mb-4">Earnings Overview</h3>
+
+  <div class="row g-3 g-md-4 mb-5">
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card earnings-card today h-100">
+        <div class="card-body d-flex align-items-center">
+          <div class="card-icon me-3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>Today's Earnings</h3>
+            <p class="amount">${{earningsData.todayEarnings}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card earnings-card week h-100">
+        <div class="card-body d-flex align-items-center">
+          <div class="card-icon me-3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="m3 17 6-6 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="m14 7 7-7v7h-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>This Week</h3>
+            <p class="amount">${{earningsData.weeklyEarnings}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card earnings-card month h-100">
+        <div class="card-body d-flex align-items-center">
+          <div class="card-icon me-3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3v5h5M21 21v-5h-5M21 3v5h-5M3 21v-5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>This Month</h3>
+            <p class="amount">${{earningsData.monthlyEarnings}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card earnings-card total h-100">
+        <div class="card-body d-flex align-items-center">
+          <div class="card-icon me-3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="m15 9-6 6M9 9h.01M15 15h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>Total Earned</h3>
+            <p class="amount">${{earningsData.earned}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <h2 class="section-title mb-4">Recent Payments</h2>
+  
+  <div class="row g-3">
+    <div class="col-12" *ngFor="let job of todayJobs">
+      <div class="card job-card">
+        <div class="card-body d-flex align-items-center justify-content-between job-card-mobile">
+          
+          <div class="d-flex flex-column align-items-center me-3 amount-mobile">
+            <p class="job-amount">{{job.Price}}</p>
+            <p class="currency">USD</p>
+          </div>
+          
+        
+          <div class="flex-grow-1 px-3">
+            <h6 class="service-title">{{job.service}}</h6>
+            <p class="client-info">{{job.client}} , {{job.date | date: 'longDate'}}</p>
+          </div>
+          
+        
+          <div class="status-mobile">
+            <span class="status-badge d-flex align-items-center" [ngClass]="job.status">
+              <svg *ngIf="job.status === 'Paid'" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <svg *ngIf="job.status === 'pending'" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            
+<svg *ngIf="job.status === 'Failed'" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+  <path d="m15 9-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m9 9 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+              
+              {{job.status | titlecase}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

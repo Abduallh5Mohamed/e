@@ -1,0 +1,166 @@
+<div class="dashboard-container">
+  <!-- Header Section -->
+  <div class="header-banner">
+    <div class="welcome-section">
+      <h1 class="welcome-text">Welcome back, John Smith!</h1>
+      <p class="subtitle">Manage your vehicles and services</p>
+    </div>
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-number">24</span>
+        <span class="stat-label">Services</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">1250</span>
+        <span class="stat-label">Points</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" [class.active]="activeTab === 'dashboard'" (click)="setActiveTab('dashboard')">
+      <i class="fas fa-tachometer-alt"></i>
+      Dashboard
+    </button>
+    <button class="nav-tab" [class.active]="activeTab === 'vehicles'" (click)="setActiveTab('vehicles')">
+      <i class="fas fa-car"></i>
+      My Vehicles
+    </button>
+    <button class="nav-tab" [class.active]="activeTab === 'history'" (click)="setActiveTab('history')">
+      <i class="fas fa-history"></i>
+      Service History
+    </button>
+    <button class="nav-tab" [class.active]="activeTab === 'profile'" (click)="setActiveTab('profile')">
+      <i class="fas fa-user-cog"></i>
+      Profile
+    </button>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-content" *ngIf="activeTab === 'dashboard'">
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="card-icon services-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <div class="card-content">
+          <h3>Total Services</h3>
+          <span class="stat-value">24</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-icon money-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="card-content">
+          <h3>Money Saved</h3>
+          <span class="stat-value">$450</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-icon loyalty-icon">
+          <i class="fas fa-award"></i>
+        </div>
+        <div class="card-content">
+          <h3>Loyalty Points</h3>
+          <span class="stat-value">1250</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-icon member-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="card-content">
+          <h3>Member Since</h3>
+          <span class="stat-value">January<br>2023</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming Services Section -->
+    <div class="upcoming-services">
+      <h2>Upcoming Services</h2>
+      <div class="service-cards" *ngIf="upcomingServices.length > 0">
+        <div class="service-card" *ngFor="let service of upcomingServices">
+          <div class="service-date">
+            <span class="day">{{ service.day }}</span>
+            <span class="month">{{ service.month }}</span>
+          </div>
+          <div class="service-details">
+            <h4>{{ service.title }}</h4>
+            <p>{{ service.description }}</p>
+            <div class="service-meta">
+              <span class="vehicle">{{ service.vehicle }}</span>
+              <span class="time">{{ service.time }}</span>
+            </div>
+          </div>
+          <div class="service-status">
+            <span class="status" [class]="service.status">{{ service.statusText }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="no-services" *ngIf="upcomingServices.length === 0">
+        <i class="fas fa-calendar-times"></i>
+        <p>No upcoming services scheduled</p>
+      </div>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="action-cards">
+        <div class="action-card book-service">
+          <div class="action-icon">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="action-content">
+            <h3>Book New Service</h3>
+            <p>Schedule your next car service</p>
+          </div>
+        </div>
+
+        <div class="action-card contact-support">
+          <div class="action-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <div class="action-content">
+            <h3>Contact Support</h3>
+            <p>Get help with your services</p>
+          </div>
+        </div>
+
+        <div class="action-card download-invoice">
+          <div class="action-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <div class="action-content">
+            <h3>Download Invoice</h3>
+            <p>Get your service receipts</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Tab Contents -->
+  <div class="tab-content" *ngIf="activeTab === 'vehicles'">
+    <app-vehicles></app-vehicles>
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'history'">
+    <app-service-history></app-service-history>
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'profile'">
+    <div class="coming-soon">
+      <i class="fas fa-construction"></i>
+      <h3>Coming Soon</h3>
+      <p>This section is under development</p>
+    </div>
+  </div>
+</div>

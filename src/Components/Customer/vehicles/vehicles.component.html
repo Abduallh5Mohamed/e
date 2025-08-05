@@ -1,0 +1,33 @@
+<div class="vehicles-container">
+  <div class="header">
+    <h2>My Vehicles</h2>
+    <button class="add-vehicle-btn">
+      <i class="fas fa-plus"></i>
+      Add Vehicle
+    </button>
+  </div>
+  <div class="vehicle-cards">
+    <div class="vehicle-card" *ngFor="let vehicle of vehicles; trackBy: trackByVehicleId">
+      <img [src]="vehicle.image" [alt]="vehicle.name" class="vehicle-img" />
+      <div class="vehicle-details">
+        <div class="card-title">
+          <h3>{{ vehicle.year }} {{ vehicle.name }}</h3>
+          <div class="card-actions">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash"></i>
+          </div>
+        </div>
+        <p class="plate-info">{{ vehicle.color }} • {{ vehicle.plateNumber }}</p>
+        <div class="info-row">
+          <span>Current Mileage:</span>
+          <span class="miles">{{ vehicle.currentMileage }} miles</span>
+        </div>
+        <div class="info-row">
+          <span>Next Service Due:</span>
+          <span class="service-due">{{ vehicle.nextServiceDue }}</span>
+        </div>
+        <button class="service-btn">Schedule Service</button>
+      </div>
+    </div>
+  </div>
+</div>
