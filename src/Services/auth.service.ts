@@ -13,7 +13,7 @@ export interface UserData {
   createdAt: any;
   lastLoginAt: any;
   emailVerified: boolean;
-  photoURL?: string;
+  photoURL?: string | null;
   provider?: string;
 }
 
@@ -58,7 +58,7 @@ export class AuthService {
             createdAt: serverTimestamp(),
             lastLoginAt: serverTimestamp(),
             emailVerified: user.emailVerified,
-            photoURL: user.photoURL || undefined,
+            photoURL: user.photoURL || null,
             provider: user.providerData[0]?.providerId || 'email'
           };
           await this.saveUserData(newUserData);
@@ -155,7 +155,7 @@ export class AuthService {
           createdAt: serverTimestamp(),
           lastLoginAt: serverTimestamp(),
           emailVerified: user.emailVerified,
-          photoURL: user.photoURL || undefined,
+          photoURL: user.photoURL || null,
           provider: 'google'
         };
         await this.saveUserData(userData);
@@ -196,7 +196,7 @@ export class AuthService {
           createdAt: serverTimestamp(),
           lastLoginAt: serverTimestamp(),
           emailVerified: user.emailVerified,
-          photoURL: user.photoURL || undefined,
+          photoURL: user.photoURL || null,
           provider: 'facebook'
         };
         await this.saveUserData(userData);
